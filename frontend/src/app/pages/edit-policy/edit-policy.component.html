@@ -1,0 +1,87 @@
+<div class="dashboard-wrapper">
+  <nav class="navbar">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
+      <div class="nav-links">
+        <button class="logout-btn" routerLink="/">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container main-content">
+    <h2 class="page-title">Edit Policy</h2>
+
+    <div class="card form-card">
+
+      <!-- Message Box -->
+      <div *ngIf="message" [ngClass]="{'message-success': messageType === 'success', 'message-error': messageType === 'error'}" class="message-box">
+        {{ message }}
+      </div>
+
+      <form (ngSubmit)="onSubmit()" #policyForm="ngForm">
+        <h5 class="section-title">Policy Information</h5>
+
+        <div class="form-group">
+          <label>Policy ID</label>
+          <input type="text" class="form-control" name="policyId" [(ngModel)]="policy.policyID" readonly disabled />
+        </div>
+
+        <div class="form-group">
+          <label>Policy Type <span class="text-danger">*</span></label>
+          <select class="form-control" name="policyType" [(ngModel)]="policy.policyType" required>
+            <option value="">Select type</option>
+            <option value="Health">Health Insurance</option>
+            <option value="Life">Life Insurance</option>
+            <option value="Car">Car Insurance</option>
+            <option value="Home">Home Insurance</option>
+            <option value="Bike">Bike Insurance</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Start Date <span class="text-danger">*</span></label>
+              <input type="date" class="form-control" name="startDate" [(ngModel)]="policy.startDate" required />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>End Date <span class="text-danger">*</span></label>
+              <input type="date" class="form-control" name="endDate" [(ngModel)]="policy.endDate" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Policy Term (years) <span class="text-danger">*</span></label>
+          <input type="number" class="form-control" name="policyTerm" [(ngModel)]="policy.policyTerm" required />
+        </div>
+
+        <h5 class="section-title mt-4">Coverage Information</h5>
+
+        <div class="form-group">
+          <label>Coverage Amount <span class="text-danger">*</span></label>
+          <input type="number" class="form-control" name="coverageAmount" [(ngModel)]="policy.coverageAmount" required />
+        </div>
+
+        <div class="form-group">
+          <label>Premium Amount <span class="text-danger">*</span></label>
+          <input type="number" class="form-control" name="premiumAmount" [(ngModel)]="policy.premiumAmount" required />
+        </div>
+
+        <div class="form-group">
+          <label>Payment Frequency <span class="text-danger">*</span></label>
+          <select class="form-control" name="premiumFrequency" [(ngModel)]="policy.premiumFrequency" required>
+            <option value="">Select frequency</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+            <option value="Annually">Annually</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn primary-btn mt-3">Update Policy</button>
+      </form>
+    </div>
+  </div>
+</div>

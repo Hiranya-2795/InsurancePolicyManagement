@@ -1,0 +1,75 @@
+<div class="dashboard-wrapper bg-light min-vh-100">
+  <nav class="navbar shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
+      <div class="nav-links">
+        <a class="nav-link" routerLink="/statistics">Statistics</a>
+        <button class="logout-btn" routerLink="/">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <h2 class="fw-bold mb-4 primary-text">Admin Dashboard</h2>
+    <p class="lead mb-4">Welcome back to your Insurance Policy Management Portal.</p>
+
+    <!-- Search and Actions Section -->
+    <div class="card p-4 shadow-sm mb-5">
+      <h5 class="fw-bold mb-3">Quick Actions</h5>
+      <div class="search-edit d-flex gap-3 flex-wrap">
+        <input
+          type="text"
+          class="form-control flex-grow-1"
+          placeholder="Search by Policy ID, Policy Type, Premium Frequency..."
+          [(ngModel)]="searchQuery"
+          (input)="searchPolicies()"
+        />
+        <div class="buttons d-flex gap-2">
+          <button class="btn primary-btn" (click)="searchPolicies()">Search</button>
+          <button class="btn outline-primary-btn" [routerLink]="['/add-policy']">Add Policy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Policies Table -->
+    <div class="card p-4 shadow-sm">
+      <h5 class="fw-bold mb-3">Existing Policies</h5>
+      <div *ngIf="loading">Loading policies...</div>
+      <div *ngIf="error" class="text-danger">{{ error }}</div>
+
+      <div class="table-responsive" *ngIf="!loading && filteredPolicies.length">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Policy ID</th>
+              <th>Policy Type</th>
+              <th>Policy Term</th>
+              <th>Coverage Amount</th>
+              <th>Premium Frequency</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let policy of filteredPolicies">
+              <td>{{ policy.policyID }}</td>
+              <td>{{ policy.policyType }}</td>
+              <td>{{ policy.policyTerm }} Years</td>
+              <td>{{ policy.coverageAmount | currency }}</td>
+              <td>{{ policy.premiumFrequency }}</td>
+              <td>
+                <div class="action-buttons d-flex gap-2">
+                  <button class="btn small-btn outline-primary-btn" [routerLink]="['/view-policy', policy.policyID]">View</button>
+                  <button class="btn small-btn primary-btn" [routerLink]="['/edit-policy', policy.policyID]">Edit</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="!loading && filteredPolicies.length === 0" class="text-muted text-center">
+        No policies found.
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,164 @@
+<div class="dashboard-wrapper">
+  <div class="container main-content">
+    <h2 class="page-title">Register</h2>
+
+    <div class="card form-card">
+
+      <!-- Message Box -->
+      <div
+        *ngIf="message"
+        [ngClass]="{'message-success': messageType === 'success', 'message-error': messageType === 'error'}"
+        class="message-box"
+      >
+        {{ message }}
+      </div>
+
+      <form (ngSubmit)="register()" #registerForm="ngForm">
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="fullName">Full Name <span class="required">*</span></label>
+          <input
+            type="text"
+            id="fullName"
+            name="FullName"
+            [(ngModel)]="registerData.FullName"
+            class="form-control"
+            required
+            pattern="^[A-Za-z\s]+$"
+          />
+          <small class="form-text text-muted">
+            Only letters and spaces are allowed, no special characters or numbers
+          </small>
+        </div>
+
+        <!-- DOB -->
+        <div class="form-group">
+          <label for="dob">Date of Birth <span class="required">*</span></label>
+          <input
+            type="date"
+            id="dob"
+            name="DateOfBirth"
+            [(ngModel)]="registerData.DateOfBirth"
+            class="form-control"
+            required
+          />
+          <small class="form-text text-muted">
+            Please select your birth date
+          </small>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+          <label for="gender">Gender <span class="required">*</span></label>
+          <select
+            id="gender"
+            name="Gender"
+            [(ngModel)]="registerData.Gender"
+            class="form-control"
+            required
+          >
+            <option value="" disabled>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <small class="form-text text-muted">
+            Please select your gender
+          </small>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label for="phone">Phone Number <span class="required">*</span></label>
+          <input
+            type="text"
+            id="phone"
+            name="PhoneNumber"
+            [(ngModel)]="registerData.PhoneNumber"
+            class="form-control"
+            maxlength="10"
+            pattern="^\d{10}$"
+            required
+          />
+          <small class="form-text text-muted">
+            Enter a 10-digit phone number without spaces or symbols
+          </small>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input
+            type="email"
+            id="email"
+            name="Email"
+            [(ngModel)]="registerData.Email"
+            class="form-control"
+            required
+          />
+          <small class="form-text text-muted">
+            Enter a valid email address (e.g., name&#64;example.com)
+          </small>
+        </div>
+
+        <!-- Aadhar -->
+        <div class="form-group">
+          <label for="aadhar">Aadhar Number <span class="required">*</span></label>
+          <input
+            type="text"
+            id="aadhar"
+            name="AadharNumber"
+            [(ngModel)]="registerData.AadharNumber"
+            class="form-control"
+            maxlength="12"
+            pattern="^\d{12}$"
+            required
+          />
+          <small class="form-text text-muted">
+            Enter your 12-digit Aadhar number without spaces or dashes
+          </small>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password <span class="required">*</span></label>
+          <input
+            type="password"
+            id="password"
+            name="Password"
+            [(ngModel)]="registerData.Password"
+            class="form-control"
+            required
+            minlength="8"
+            maxlength="20"
+            pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,20}$"
+          />
+          <small class="form-text text-muted">
+            8–20 characters, must include at least one uppercase letter, one number, and one special character
+          </small>
+        </div>
+
+        <!-- Role -->
+        <div class="form-group">
+          <label for="role">Role <span class="required">*</span></label>
+          <select
+            id="role"
+            name="Role"
+            [(ngModel)]="registerData.Role"
+            class="form-control"
+            required
+          >
+            <option value="" disabled>Select Role</option>
+            <option value="User">User</option>
+            <option value="Admin">Admin</option>
+          </select>
+          <small class="form-text text-muted">
+            Choose your role in the system
+          </small>
+        </div>
+
+        <button type="submit" class="btn primary-btn mt-3">Register</button>
+      </form>
+    </div>
+  </div>
+</div>

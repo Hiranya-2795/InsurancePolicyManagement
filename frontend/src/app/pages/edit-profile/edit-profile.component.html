@@ -1,0 +1,156 @@
+<div class="dashboard-wrapper">
+  <nav class="navbar">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
+      <div class="nav-links">
+        <button class="logout-btn" routerLink="/">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container main-content">
+    <h2 class="page-title">Edit Profile</h2>
+
+    <div class="card form-card">
+
+      <!-- Message box for success/error -->
+      <div *ngIf="message" [ngClass]="{'message-success': messageType === 'success', 'message-error': messageType === 'error'}" class="message-box">
+        {{ message }}
+      </div>
+
+      <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
+        <div *ngFor="let error of errors" class="error">{{ error }}</div>
+
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="fullName">Full Name <span class="required">*</span></label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            [(ngModel)]="profile.fullName"
+            required
+            pattern="^[A-Za-z\s]+$"
+            class="form-control"
+          />
+          <div class="condition-text">
+            Only letters and spaces are allowed, no special characters or numbers
+          </div>
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="form-group">
+          <label for="dob">Date of Birth <span class="required">*</span></label>
+          <input
+            type="date"
+            id="dob"
+            name="dob"
+            [(ngModel)]="profile.dob"
+            required
+            class="form-control"
+          />
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+          <label for="gender">Gender <span class="required">*</span></label>
+          <select
+            id="gender"
+            name="gender"
+            [(ngModel)]="profile.gender"
+            required
+            class="form-control"
+          >
+            <option value="" disabled>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label for="phone">Phone <span class="required">*</span></label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            [(ngModel)]="profile.phone"
+            required
+            pattern="^\d{10}$"
+            class="form-control"
+          />
+          <div class="condition-text">
+            Only 10-digit phone number without spaces or symbols is allowed
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            [(ngModel)]="profile.email"
+            required
+            class="form-control"
+          />
+        </div>
+
+        <!-- Aadhar Number -->
+        <div class="form-group">
+          <label for="aadharNo">Aadhar Number <span class="required">*</span></label>
+          <input
+            type="text"
+            id="aadharNo"
+            name="aadharNo"
+            [(ngModel)]="profile.aadharNo"
+            required
+            pattern="^\d{12}$"
+            class="form-control"
+          />
+          <div class="condition-text">
+            Only 12-digit Aadhar number without spaces or dashes is allowed
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password <span class="required">*</span></label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="profile.password"
+            minlength="8"
+            maxlength="20"
+            pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,20}$"
+            class="form-control"
+          />
+          <div class="condition-text">
+            Must be 8–20 characters, include at least 1 uppercase, 1 number, 1 special character
+          </div>
+        </div>
+
+        <!-- Role (Read-Only) -->
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input
+            type="text"
+            id="role"
+            name="role"
+            [(ngModel)]="profile.role"
+            class="form-control"
+            readonly
+          />
+          <div class="condition-text">
+            Role is fixed and cannot be changed
+          </div>
+        </div>
+
+        <button type="submit" class="btn primary-btn mt-3">Update Profile</button>
+      </form>
+    </div>
+  </div>
+</div>

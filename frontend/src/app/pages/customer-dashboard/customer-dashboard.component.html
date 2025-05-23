@@ -1,0 +1,72 @@
+<div class="dashboard-wrapper bg-light min-vh-100">
+  <nav class="navbar shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
+      <div class="nav-links">
+        <button class="logout-btn" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <h2 class="fw-bold mb-4 primary-text">Customer Dashboard</h2>
+    <p class="lead mb-4">Welcome back to your Insurance Policy Management Portal.</p>
+
+    <!-- Search and Actions Section -->
+    <div class="card p-4 shadow-sm mb-5">
+      <h5 class="fw-bold mb-3">Quick Actions</h5>
+      <div class="search-edit d-flex gap-3 flex-wrap">
+        <input
+          type="text"
+          class="form-control flex-grow-1"
+          placeholder="Search by Policy ID, Policy Type, or Premium Frequency..."
+          [(ngModel)]="searchQuery"
+          (input)="searchPolicies()"
+        />
+        <div class="buttons d-flex gap-2">
+          <button class="btn primary-btn" (click)="searchPolicies()">Search</button>
+          <button class="btn outline-primary-btn" routerLink="/edit-profile">Edit Profile</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- My Policies Table -->
+    <div class="card p-4 shadow-sm">
+      <h5 class="fw-bold mb-3">My Policies</h5>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Policy ID</th>
+              <th>Policy Type</th>
+              <th>Coverage Amount</th>
+              <th>Premium Frequency</th>
+              <th>Beneficiary Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let policy of policies">
+              <td>{{ policy.policyID }}</td>
+              <td>{{ policy.policy?.policyType }}</td>
+              <td>${{ policy.policy?.coverageAmount }}</td>
+              <td>{{ policy.policy?.premiumFrequency }}</td>
+              <td>{{ policy.beneficiaryName }}</td>
+              <td>
+                <button
+                  class="btn small-btn outline-primary-btn"
+                  [routerLink]="['/view-policy', policy.policyID]"
+                >
+                  View Policy
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="policies.length === 0">
+              <td colspan="6" class="text-center text-muted">No policies found.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

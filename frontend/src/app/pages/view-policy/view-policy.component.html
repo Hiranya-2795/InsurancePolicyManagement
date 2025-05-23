@@ -1,0 +1,50 @@
+<div class="dashboard-wrapper bg-light min-vh-100">
+  <nav class="navbar shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Insurance Policy Management System</a>
+      <div class="nav-links">
+        <button class="logout-btn" routerLink="/">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5" *ngIf="policy">
+    <h2 class="fw-bold mb-4 primary-text">View Policy</h2>
+    <p class="lead mb-4">Detailed information about your policy</p>
+
+    <!-- 📄 Policy Information -->
+    <div class="card p-4 shadow-sm mb-5">
+      <h5 class="fw-bold mb-3">Policy Information</h5>
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr><th>Policy ID</th><td>{{ policy.policyID }}</td></tr>
+            <tr><th>Policy Type</th><td>{{ policy.policyType }}</td></tr>
+            <tr><th>Policy Start Date</th><td>{{ policy.startDate | date }}</td></tr>
+            <tr><th>Policy End Date</th><td>{{ policy.endDate | date }}</td></tr>
+            <tr><th>Policy Term</th><td>{{ policy.policyTerm }}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 📑 Coverage Information -->
+    <div class="card p-4 shadow-sm mb-5">
+      <h5 class="fw-bold mb-3">Coverage Information</h5>
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr><th>Coverage Amount</th><td>{{ policy.coverageAmount | currency }}</td></tr>
+            <tr><th>Premium Amount</th><td>{{ policy.premiumAmount | currency }}</td></tr>
+            <tr><th>Payment Frequency</th><td>{{ policy.premiumFrequency }}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading or No Policy Found -->
+  <div class="container my-5" *ngIf="!policy">
+    <p>Loading policy details…</p>
+  </div>
+</div>
